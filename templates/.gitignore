@@ -1,0 +1,52 @@
+# 忽略文件和目录
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# IDE配置
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 构建和发布
+build/
+dist/
+*.egg-info/
+
+# 环境变量
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 测试覆盖率
+coverage/
+.coverage
+*.cover
+
+# 其他
+.pytest_cache/
+.tox/
