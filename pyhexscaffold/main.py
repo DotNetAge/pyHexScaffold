@@ -19,10 +19,8 @@ from datetime import datetime
 
 # 获取当前脚本所在目录
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-# 获取包根目录
-PACKAGE_DIR = os.path.dirname(SCRIPT_DIR)
-# 定义模板目录路径
-TEMPLATES_DIR = os.path.join(PACKAGE_DIR, "templates")
+# 定义模板目录路径（现在templates目录直接在包内）
+TEMPLATES_DIR = os.path.join(SCRIPT_DIR, "templates")
 
 
 def read_template_file(template_path):
@@ -67,21 +65,134 @@ def create_file(file_path, content):
     print(f"已创建文件: {file_path}")
 
 
+gitignore_content = """
+# 忽略文件和目录
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# IDE配置
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 构建和发布
+build/
+dist/
+*.egg-info/
+
+# 环境变量
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 测试覆盖率
+coverage/
+.coverage
+*.cover
+
+# 其他
+.pytest_cache/
+.tox/
+"""
+
+dockerignore_content = """
+# Python缓存
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 测试
+.pytest_cache/
+coverage/
+
+# IDE配置
+.idea/
+.vscode/
+
+# 日志
+*.log
+
+# 环境变量
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+"""
+
+env_content = f"""# [project_name] 环境变量配置
+
+# 应用配置
+APP_NAME=[project_name]
+APP_VERSION=[project_version]
+APP_DEBUG=True
+
+# 服务器配置
+APP_HOST=0.0.0.0
+APP_PORT=8000
+
+# Redis配置
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_DB=0
+
+# CORS配置
+CORS_ORIGINS=*
+
+"""
+
+
 def generate_basic_files(project_path, project_name, project_version):
     """生成项目的基础配置文件"""
     # 创建.gitignore文件
-    gitignore_content = read_template_file(".gitignore")
+    # gitignore_content = read_template_file(".gitignore")
     create_file(f"{project_path}/.gitignore", gitignore_content)
 
     # 创建.dockerignore文件
-    dockerignore_content = read_template_file(".dockerignore")
+    # dockerignore_content = read_template_file(".dockerignore")
     create_file(f"{project_path}/.dockerignore", dockerignore_content)
 
     # 创建.env文件
-    env_content = read_template_file(".env")
+    # env_content = read_template_file(".env")
     # 替换项目名称变量
-    env_content = env_content.replace("{project_name}", project_name)
-    create_file(f"{project_path}/.env", env_content)
+    _env = env_content.replace("[project_name]", project_name).replace(
+        "[project_version]", project_version
+    )
+    create_file(f"{project_path}/.env", _env)
 
     # 创建requirements.txt文件
     requirements_content = read_template_file("requirements.txt")
@@ -109,9 +220,9 @@ def generate_config_files(project_path):
     config_init_content = read_template_file("src/config/__init__.py")
     create_file(f"{project_path}/src/config/__init__.py", config_init_content)
 
-    # 创建src/config/settings.py
-    settings_content = read_template_file("src/config/settings.py")
-    create_file(f"{project_path}/src/config/settings.py", settings_content)
+    # # 创建src/config/settings.py
+    # settings_content = read_template_file("src/config/settings.py")
+    # create_file(f"{project_path}/src/config/settings.py", settings_content)
 
 
 def generate_domain_files(project_path):

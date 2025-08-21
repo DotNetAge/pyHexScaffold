@@ -29,6 +29,7 @@ class Config(BaseSettings):
     model_config = {"env_file": dotenv_path, "env_file_encoding": "utf-8"}
 
     # 应用程序配置 - 默认值与.env文件同步
+    # NOTE: 此处配置项必须与 .env 一至，.env的配置只可以少不可以多,否则会引发错误
     APP_NAME: str = Field(default="data-svc", alias="APP_NAME")
     APP_ENV: str = Field(default="development", alias="APP_ENV")
     APP_DEBUG: bool = Field(default=True, alias="APP_DEBUG")

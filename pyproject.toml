@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 authors = [{ name = "Ray", email = "ray@rayainfo.cn" }]
 license = "MIT"
 name = "pyHexScaffold"
-version = "1.0.0"
+version = "1.0.5"
 description = "六边形架构项目脚手架生成器"
 readme = "README.md"
 keywords = ["hexagonal", "architecture", "scaffold", "generator", "FastAPI"]
@@ -34,4 +34,4 @@ pyhexscaffold = "pyhexscaffold.main:main"
 packages = ["pyhexscaffold"]
 
 [tool.setuptools.package-data]
-"pyhexscaffold" = ["../templates/**"]
+"pyhexscaffold" = ["./templates/**"]

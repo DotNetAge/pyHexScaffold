@@ -101,10 +101,6 @@ project_name/
 - **应用层**（Application）：协调领域对象和端口，实现用例。
 - **适配器层**（Adapters）：实现端口，将外部系统（如数据库、API客户端、UI等）连接到核心业务逻辑。
 
-## 开发指南
-
-生成的项目包含详细的开发指南，您可以在生成的项目中的`docs/hexagonal_architecture_scaffold.md`文件中找到更多信息。
-
 ### 基本开发流程
 
 1. 进入项目目录：`cd /path/to/project`
